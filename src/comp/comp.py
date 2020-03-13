@@ -30,79 +30,54 @@ humans = [
 # whose name starts with 'D':
 a=[]
 print("Starts with D:")
-for index, test_case in enumerate(humans):
-    if(test_case.name[0].lower() == 'd'):
-        a.append(test_case.name)
+a = [test_case.name for test_case in humans  if test_case.name[0].lower() =='d']
 print(a)
-
 #%%
 # Write a list comprehension that creates a list of names of everyone
 # whose name ends in "e".
 print("Ends with e:")
-b = []
-for index, test_case in enumerate(humans):
-    #print(test_case.name[0], type(test_case.name[0]))
-    if (test_case.name[-1].lower() == 'e'):
-        #print(test_case.name)
-        b.append(test_case.name)
+b = [test_case.name for test_case in humans if test_case.name[-1].lower() == 'e']
 print(b)
+
 #%%
 # Write a list comprehension that creates a list of names of everyone
 # whose name starts with any letter between 'C' and 'G' inclusive.
 print("Starts between C and G, inclusive:")
-c = []
 CthoughtG = 'C','D','E','F','G'
-for index, test_case in enumerate(humans):
-    if test_case.name[0] in CthoughtG:
-        c.append(test_case.name)
+c = [test_case.name for test_case in humans if test_case.name[0] in CthoughtG]
 print(c)
 #%%
 # Write a list comprehension that creates a list of all the ages plus 10.
 print("Ages plus 10:")
-d = []
-for index, test_case in enumerate(humans):
-    #if test_case.age > 10:
-        #if the list is a tuple (david 31)
-        #d.append(test_case)
-        #if the list is only 10
-    d.append(test_case.age + 10)
+d = [test_case.age + 10 for test_case in humans]
+
 print(d)
+
 #%%
 # Write a list comprehension that creates a list of strings which are the name
 # joined to the age with a hyphen, for example "David-31", for all humans.
 print("Name hyphen age:")
-e = []
-for index, test_case in enumerate(humans):
-    hyphenating = test_case.name + "-" + str(test_case.age)
-    e.append(hyphenating)
+e = [test_case.name + "-" + str(test_case.age) for test_case in humans ]
+
 print(e)
 #%%
 # Write a list comprehension that creates a list of tuples containing name and
 # age, for example ("David", 31), for everyone between the ages of 27 and 32,
 # inclusive.
 print("Names and ages between 27 and 32:")
-f = []
-for index, test_case in enumerate(humans):
-    if ((test_case.age > 27) and (test_case.age <= 32)):
-        tupleit = (test_case.name,test_case.age)
-        f.append(tupleit)
+f = [(test_case.name, test_case.age) for test_case in humans if((test_case.age > 27) and (test_case.age <= 32))]
 print(f)
 #%%
 # Write a list comprehension that creates a list of new Humans like the old
 # list, except with all the names uppercase and the ages with 5 added to them.
 # The "humans" list should be unmodified.
-print("All names uppercase:")
-g = []
-for index, test_case in enumerate(humans):
-    #print(test_case.name.upper(), test_case.age + 5)
-    tupleIt = (test_case.name.upper(), test_case.age+5)
-    g.append(tupleIt)
+g = [(Human(test_case.name.upper(), test_case.age+5)) for test_case in humans]
 print(g)
+
 #%%
 # Write a list comprehension that contains the square root of all the ages.
 print("Square root of ages:")
 import math
-h = []
-for index, test_case in enumerate(humans):
-    h.append(math.sqrt(test_case.age))
+h = [math.sqrt(test_case.age) for test_case in humans]
 print(h)
+
