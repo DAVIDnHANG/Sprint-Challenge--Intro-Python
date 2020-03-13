@@ -1,11 +1,22 @@
+#%%
 # Create a class to hold a city location. Call the class "City". It should have
 # fields for name, lat and lon (representing latitude and longitude).
-
-
+class City():
+    def __init__(self, name, lat, lon):
+        self.name = name
+        self.lat = lat
+        self.lon= lon
+    def __str__(self):
+        return "{self.name}, {self.lat}, {self.lon}".format(self=self)
+#%%
+import pandas as pd
+df = pd.read_csv("F:\Pycharm\Sprint-Challenge--Intro-Python\src\cityreader\cities.csv")
+df.columns
+#%%
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
 #
-# In the body of the `cityreader` function, use Python's built-in "csv" module 
+# In the body of the `cityreader` function, use Python's built-in "csv" module
 # to read this file so that each record is imported into a City instance. Then
 # return the list with all the City instances from the function.
 # Google "python 3 csv" for references and use your Google-fu for other examples.
@@ -18,13 +29,14 @@ cities = []
 
 def cityreader(cities=[]):
   # TODO Implement the functionality to read from the 'cities.csv' file
-  # For each city record, create a new City instance and add it to the 
+  # For each city record, create a new City instance and add it to the
   # `cities` list
-    
+    #columns = ["city", "lat", "lng"]
+    for i in range(len(df)):
+        cities.append(City(df.loc[i,'city'], df.loc[i,'lat'], df.loc[i,'lng']))
     return cities
-
+#%%
 cityreader(cities)
-
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
     print(c)
@@ -63,7 +75,24 @@ for c in cities:
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # within will hold the cities that fall within the specified region
   within = []
-
+  #find lowest lat
+  if lat1 < lat2:
+      lowestLat = lat1
+      highestLat = lat2
+  else:
+      lowestLat = lat2
+      highestLat = lat1
+  #find highest lon
+  if lon2 > lon1:
+      highestLon = lon2
+      lowestLon = lon1
+  else:
+      highestLon = lon1
+      lowestLon = lon2
+  for c in cities:
+      print(c)
+      if((lowestLat > c.lat) and (highestLat < c.lat) and (highestLon < c.lng) and (lowestLon > c.lng)):
+          print(cities)
   # TODO Ensure that the lat and lon valuse are all floats
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
